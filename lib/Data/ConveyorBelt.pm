@@ -1,10 +1,10 @@
-# $Id: ConveyorBelt.pm 3 2007-08-02 00:02:40Z btrott $
-
 package Data::ConveyorBelt;
 use strict;
+use 5.008_001;
+
 use base qw( Class::Accessor::Fast );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 __PACKAGE__->mk_accessors(qw( getter filters ));
 
@@ -67,17 +67,18 @@ Data::ConveyorBelt
 
 =head1 SYNOPSIS
 
+    my @data = ( 1 .. 15 );
+
     my $machine = Data::ConveyorBelt->new;
     $machine->getter( sub {
         my( $limit, $offset ) = @_;
-        my $data = ...
-        return $data;
+        $offset ||= 0;
+        return [ @data[ $offset .. $offset + $limit ] ];
     } );
 
     $machine->add_filter( sub {
         my( $data ) = @_;
-        ...
-        return $data;
+        return [ grep { $_ % 2 == 1 } @$data ];
     } );
     
     my $data = $machine->fetch( limit => 5 );

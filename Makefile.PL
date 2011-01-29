@@ -1,13 +1,16 @@
-# $Id$
-
 use inc::Module::Install;
+name 'Data-ConveyorBelt';
+all_from 'lib/Data/ConveyorBelt.pm';
+readme_from 'lib/Data/ConveyorBelt.pm';
 
-name            'Data-ConveyorBelt';
-all_from        'lib/Data/ConveyorBelt.pm';
+requires 'Carp';
+requires 'Class::Accessor::Fast';
+requires 'List::Util';
 
-requires        'Carp'                      => 0;
-requires        'Class::Accessor::Fast'     => 0;
-requires        'List::Util'                => 0;
+test_requires 'Test::More';
 
-auto_install;
+use_test_base;
+auto_include_deps;
+author_tests('xt');
+auto_set_repository;
 WriteAll;

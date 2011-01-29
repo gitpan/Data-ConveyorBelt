@@ -1,5 +1,3 @@
-# $Id: 01-basic.t 3 2007-08-02 00:02:40Z btrott $
-
 use Test::More tests => 18;
 
 use Data::ConveyorBelt;
